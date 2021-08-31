@@ -28,14 +28,8 @@ const companySchema =new mongoose.Schema({
     proftax : String,
 
     //earnings and reimbursment
-    earningsDocArray : [{
-        earningType : String,
-        amount : Number
-    }],
-    reimbursmentArray : [{
-        type:String,
-        amount:Number,
-    }],
+    earningsDocArray : Array,
+    reimbursmentArray : Array,
     logArray : Array
 
 },{timestamps: true})
