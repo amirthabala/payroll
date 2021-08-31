@@ -12,6 +12,8 @@ const companySchema =new mongoose.Schema({
     //pay schedule
     payDate : String,
     payRollStartFrom : String,
+    workdays  : Array,
+    workHours  : Number,
 
     //tax details
     pan : String,
