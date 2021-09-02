@@ -10,7 +10,6 @@ const fastify = require('fastify')({
   // database connection
   const mongoose = require('mongoose');
 
-    fastify.register(require('fastify-cors'), { origin: '*' });
   //fastify.register(require('fastify-cors'), { origin: true })
   mongoose.connect('mongodb+srv://gokul:gokul@cluster0.xo1l9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
 .then(() => console.log("Mongo is ready !"))
