@@ -1,11 +1,33 @@
 const Employee = require("../models/employee")
+const Company = require("../models/company")
+
 
 exports.createEmployee = async (req, reply) => { 
     try { 
         const employee = new Employee(req.body)   
-        console.log(employee)    
+        
+        //earnings calculation
+        const company=await Company.findById(employee.companyId)
+        var earnings=0;
+        for (const earning in company.earningsDocArray) {
+            earnings+=Number(company.earningsDocArray[earning].amount);
+          }
+        console.log(earnings);
+
+        //salary calculation
+        employee.salary=earnings+Number(employee.basicPay);
+        console.log(employee);
         employee.save()
-        reply.send({employee,"message":'Employee Created'}) 
+        
+        //updating company emp count and emp netpay
+        var updatedObj={
+            employeeCount:company.employeeCount+1,
+            employeeNetPay:company.employeeNetPay+employee.salary
+        }
+        
+        const updatedCompany = await Company.findByIdAndUpdate(employee.companyId,{ $set: updatedObj},{new:true,useFindAndModify:false})
+        
+        reply.send({employee,updatedCompany,"message":'Employee Created'}) 
     } 
     catch(error){
         reply.send ({ "error" : 'Creation Failed' })    
