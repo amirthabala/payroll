@@ -95,7 +95,7 @@ exports.deleteEmployee = async (req,reply)=>{
         const deletedEmployee=await Employee.findByIdAndRemove(id,{new:true,useFindAndModify:false})
         console.log("delete");      
         if(employee){
-            reply.send({deletedEmployee,"error":"Your company is deleted successfully"});
+            reply.send({deletedEmployee,"message":"Your company is deleted successfully"});
         }    
         else{
         reply.send ({ "error" : 'No Company Found' })   
