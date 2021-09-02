@@ -1,18 +1,20 @@
-const {createEmployee,viewAllEmployee,viewEmployee,viewEmployeeEmail,editEmployee,deleteEmployee} = require("../controllers/employee")
+const {createEmployee,viewAllEmployee,viewEmployee,viewEmployeeEmail,editEmployee,deleteEmployee,viewEmployeeByCompany} = require("../controllers/employee")
 module.exports = async function (fastify, opts, done) {
 
 
-    fastify.post('/Employee',createEmployee)
+    fastify.post('/employee',createEmployee)
 
-    fastify.get('/Employee',viewAllEmployee)
+    fastify.get('/employee',viewAllEmployee)
 
-    fastify.get('/Employee/:id',viewEmployee)
+    fastify.get('/employee/:id',viewEmployee)
 
-    fastify.get('/EmployeeEmail/:email',viewEmployeeEmail)
+    fastify.get('/companyEmployee/:companyId',viewEmployeeByCompany)
 
-    fastify.put('/Employee/:id',editEmployee)
+    fastify.get('/employeeEmail/:email',viewEmployeeEmail)
 
-    fastify.delete('/Employee/:id',deleteEmployee)
+    fastify.put('/employee/:id',editEmployee)
+
+    fastify.delete('/employee/:id',deleteEmployee)
 
     done()
 }

@@ -2,17 +2,17 @@ const {createReimbursment,viewAllReimbursment,viewCompanyReimbursment,viewEmploy
 module.exports = async function (fastify, opts, done) {
 
 
-    fastify.post('/Reimbursment',createReimbursment)
+    fastify.post('/reimbursment',createReimbursment)
 
-    fastify.get('/Reimbursment',viewAllReimbursment)
+    fastify.get('/reimbursment',viewAllReimbursment)
 
-    fastify.get('/CompanyReimbursment/:companyId',viewCompanyReimbursment)
+    fastify.get('/companyReimbursment/:companyId',viewCompanyReimbursment)
 
-    fastify.get('/EmployeeReimbursment/:employeeId',viewEmployeeReimbursment)
+    fastify.get('/employeeReimbursment/:employeeId',viewEmployeeReimbursment)
 
-    fastify.put('/Reimbursment/:id',editReimbursment)
+    fastify.put('/reimbursment/:id',editReimbursment)
 
-    fastify.delete('/Reimbursment/:id',deleteReimbursment)
+    fastify.delete('/reimbursment/:id',deleteReimbursment)
 
     done()
 }

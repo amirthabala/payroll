@@ -2,17 +2,18 @@ const { createCompany,viewAllCompany,viewCompany,editCompany,deleteCompany, view
 module.exports = async function (fastify, opts, done) {
 
 
-    fastify.post('/Company',createCompany)
+    fastify.post('/company',createCompany)
 
-    fastify.get('/Company',viewAllCompany)
+    fastify.get('/company',viewAllCompany)
 
-    fastify.get('/Company/:id',viewCompany)
+    fastify.get('/company/:id',viewCompany)
 
-    fastify.get('/CompanyEmail/:email',viewCompanyEmail)
 
-    fastify.put('/Company/:id',editCompany)
+    fastify.get('/companyEmail/:email',viewCompanyEmail)
 
-    fastify.delete('/Company/:id',deleteCompany)
+    fastify.put('/company/:id',editCompany)
+
+    fastify.delete('/company/:id',deleteCompany)
 
     done()
 }

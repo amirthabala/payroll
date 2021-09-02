@@ -6,7 +6,9 @@ exports.createReimbursment = async (req, reply) => {
         console.log(reimbursment)    
         return reimbursment.save() 
     } 
-    catch (error) { throw error } 
+    catch(error){
+        reply.send ({ "error" : 'Creation Failed' })    
+    } 
 }
 
 exports.viewAllReimbursment = async (req, reply) => { 
@@ -14,7 +16,9 @@ exports.viewAllReimbursment = async (req, reply) => {
         const reimbursment= await Reimbursment.find();
         reply.send(reimbursment);
     } 
-    catch (error) { throw error } 
+    catch(error){
+        reply.send ({ "error" : 'View Failed' })    
+    } 
 }
 
 exports.viewCompanyReimbursment= async (req,reply) => {
@@ -24,9 +28,9 @@ exports.viewCompanyReimbursment= async (req,reply) => {
         const reimbursment = await Reimbursment.find({companyId:id});
         reply.send(reimbursment);
     }
-    catch (error) {
-        throw error
-    }
+    catch(error){
+        reply.send ({ "error" : 'View Failed' })    
+    } 
 }
 
 exports.viewEmployeeReimbursment = async (req,reply) => {
@@ -36,9 +40,9 @@ exports.viewEmployeeReimbursment = async (req,reply) => {
         const reimbursment = await Reimbursment.find({employeeId : id});
         reply.send(reimbursment);
     }
-    catch (error) {
-        throw error
-    }
+    catch(error){
+        reply.send ({ "error" : 'View Failed' })    
+    } 
 }
 
 
@@ -49,8 +53,8 @@ exports.editReimbursment= async (req,reply)=>{
         reply.send({updatedreimbursment,"message":"Your Company Is Updated Successfully"})
     }
     catch(error){
-        throw error
-    }
+        reply.send ({ "error" : 'Update Failed' })    
+    } 
 }
 
 exports.deleteReimbursment = async (req,reply)=>{
@@ -61,6 +65,6 @@ exports.deleteReimbursment = async (req,reply)=>{
         reply.send({deletedreimbursment,"error":"Your company is deleted successfully"});
     }
     catch(error){
-        throw error
-    }
+        reply.send ({ "error" : 'Deletion Failed' })    
+    } 
 }
