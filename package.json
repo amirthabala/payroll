@@ -12,6 +12,7 @@
   "dependencies": {
     "fastify": "^3.20.2",
     "mongoose": "^6.0.2",
+    "fastify-cors": "^6.0.2",
     "nodemon": "^2.0.12"
   }
 }
