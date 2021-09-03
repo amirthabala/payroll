@@ -26,7 +26,7 @@ exports.createEmployee = async (req, reply) => {
         }
         
         const updatedCompany = await Company.findByIdAndUpdate(employee.companyId,{ $set: updatedObj},{new:true,useFindAndModify:false})
-        const allEmployee=await Employee.find({companyId:companyId});
+        const allEmployee=await Employee.find({companyId:employee.companyId});
         reply.send({employee,updatedCompany,allEmployee,"message":'Employee Created'}) 
     } 
     catch(error){
