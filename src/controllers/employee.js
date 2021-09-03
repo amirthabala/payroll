@@ -121,7 +121,8 @@ exports.editEmployee= async (req,reply)=>{
             }
             //updating company table
             const updatedCompany = await Company.findByIdAndUpdate(updatedEmployee.companyId,{ $set: updatedObj},{new:true,useFindAndModify:false})
-            reply.send({updatedEmployee,"message":"Your Company Is Updated Successfully"})
+            const allEmployee=await Employee.find({companyId:updatedEmployee.companyId});
+            reply.send({updatedEmployee,allEmployee,"message":"Your Company Is Updated Successfully"})
         }    
         else{
         reply.send ({ "error" : 'No Company Found' })   
