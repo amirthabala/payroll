@@ -145,7 +145,7 @@ exports.deleteEmployee = async (req,reply)=>{
             }           
             const updatedCompany = await Company.findByIdAndUpdate(deletedEmployee.companyId,{ $set: updatedObj},{new:true,useFindAndModify:false})
             console.log(updatedCompany)
-            const allEmployee=await Employee.find({companyId:employee.companyId});
+            const allEmployee=await Employee.find({companyId:deletedEmployee.companyId});
             reply.send({updatedCompany,deletedEmployee,allEmployee,"message":"Your company is deleted successfully"});
         }    
         else{
