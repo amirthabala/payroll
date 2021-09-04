@@ -3,6 +3,8 @@ const reimbursmentSchema =new mongoose.Schema({
 
     employeeId : String,
     companyId : String,
+    employeeName : String,
+    employeeEmail : String,
     type : String,
     status : String,
     amount : Number,
