@@ -6,6 +6,8 @@ exports.createReimbursment = async (req, reply) => {
         const reimbursment = new Reimbursment(req.body)   
         console.log(reimbursment)    
         await reimbursment.save()
+        
+        //get remimbursment by companyID
         const Allreimbursment = await Reimbursment.find({employeeId : reimbursment.employeeId});
         reply.send(Allreimbursment); 
     } 
@@ -65,7 +67,10 @@ exports.editReimbursment= async (req,reply)=>{
     try{
         const id = req.params.id;
         const updatedreimbursment = await Reimbursment.findByIdAndUpdate(id,{ $set:req.body},{new:true,useFindAndModify:false})
-        reply.send({updatedreimbursment,"message":"Your Company Is Updated Successfully"})
+        
+        //get remimbursment by companyID
+        const reimbursment = await Reimbursment.find({companyId:updatedreimbursment.companyId});
+        reply.send({reimbursment,"message":"updated succesfully"});
     }
     catch(error){
         reply.send ({ "error" : 'Update Failed' })    
