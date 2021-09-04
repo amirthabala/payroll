@@ -1,14 +1,29 @@
 const Reimbursment = require("../models/reimbursment")
+const Company = require("../models/company")
 
 exports.createReimbursment = async (req, reply) => { 
     try { 
         const reimbursment = new Reimbursment(req.body)   
         console.log(reimbursment)    
-        return reimbursment.save() 
+        await reimbursment.save()
+        const Allreimbursment = await Reimbursment.find({employeeId : reimbursment.employeeId});
+        reply.send(Allreimbursment); 
     } 
     catch(error){
         reply.send ({ "error" : 'Creation Failed' })    
     } 
+}
+
+exports.viewCompanyReimbursmentList = async (req,reply)=>{
+    const id=req.params.companyId;
+    try{
+        const company = await Company.findById(id);
+        
+        reply.send(company.reimbursmentArray)
+    }
+    catch(error){
+        reply.send({"error": "could not fetch reimbursment"})
+    }
 }
 
 exports.viewAllReimbursment = async (req, reply) => { 
