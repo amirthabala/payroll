@@ -68,6 +68,15 @@ exports.editReimbursment= async (req,reply)=>{
         const id = req.params.id;
         const updatedreimbursment = await Reimbursment.findByIdAndUpdate(id,{ $set:req.body},{new:true,useFindAndModify:false})
         
+        if(updatedreimbursment.status=="Approved"){
+            //updating salary of employee
+            const employee = await Employee.findById(updatedreimbursment.employeeId)
+            await Employee.findByIdAndUpdate(updatedreimbursment.employeeId,{ $set:{salary : employee.salary+updatedreimbursment.amount}},{new:true,useFindAndModify:false}) 
+            //updating netpay of company
+            const company = await Employee.findById(updatedreimbursment.companyId)
+            await Employee.findByIdAndUpdate(updatedreimbursment.companyId,{ $set:{salary : company.employeeNetPay+updatedreimbursment.amount}},{new:true,useFindAndModify:false}) 
+        }
+        
         //get remimbursment by companyID
         const reimbursment = await Reimbursment.find({companyId:updatedreimbursment.companyId});
         reply.send({reimbursment,"message":"updated succesfully"});
