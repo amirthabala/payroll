@@ -1,4 +1,4 @@
-const {createReimbursment,viewAllReimbursment,viewCompanyReimbursment,viewEmployeeReimbursment,editReimbursment,deleteReimbursment} = require("../controllers/reimbursment")
+const {createReimbursment,viewAllReimbursment,viewCompanyReimbursment,viewCompanyReimbursmentList,viewEmployeeReimbursment,editReimbursment,deleteReimbursment} = require("../controllers/reimbursment")
 module.exports = async function (fastify, opts, done) {
 
 
@@ -9,6 +9,8 @@ module.exports = async function (fastify, opts, done) {
     fastify.get('/companyReimbursment/:companyId',viewCompanyReimbursment)
 
     fastify.get('/employeeReimbursment/:employeeId',viewEmployeeReimbursment)
+
+    fastify.get('/companyReimbursmentList/:companyId',viewCompanyReimbursmentList)
 
     fastify.put('/reimbursment/:id',editReimbursment)
 
