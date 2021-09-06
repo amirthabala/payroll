@@ -72,7 +72,11 @@ exports.editReimbursment= async (req,reply)=>{
         if(updatedreimbursment.status=="Approved"){
             //updating salary of employee
             const employee = await Employee.findById(updatedreimbursment.employeeId)
-            await Employee.findByIdAndUpdate(updatedreimbursment.employeeId,{ $set:{salary : employee.salary+updatedreimbursment.amount}},{new:true,useFindAndModify:false}) 
+            const updateObj = {
+                salary : employee.salary + updatedreimbursment.amount,
+                approvedReimbursment : employee.approvedReimbursment + updatedreimbursment.amount
+            }
+            await Employee.findByIdAndUpdate(updatedreimbursment.employeeId,{ $set:updateObj},{new:true,useFindAndModify:false}) 
             //updating netpay of company
             const company = await Company.findById(updatedreimbursment.companyId)
             await Company.findByIdAndUpdate(updatedreimbursment.companyId,{ $set:{employeeNetPay : company.employeeNetPay+updatedreimbursment.amount}},{new:true,useFindAndModify:false}) 
