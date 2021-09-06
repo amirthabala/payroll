@@ -1,5 +1,6 @@
 const Reimbursment = require("../models/reimbursment")
 const Company = require("../models/company")
+const Employee = require("../models/employee")
 
 exports.createReimbursment = async (req, reply) => { 
     try { 
