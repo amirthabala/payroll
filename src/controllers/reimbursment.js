@@ -80,7 +80,7 @@ exports.editReimbursment= async (req,reply)=>{
         
         //get remimbursment by companyID
         const reimbursment = await Reimbursment.find({companyId:updatedreimbursment.companyId});
-        reply.send({reimbursment,"message":"updated succesfully"});
+        reply.send({updatedreimbursment,reimbursment,"message":"updated succesfully"});
     }
     catch(error){
         reply.send ({ "error" : 'Update Failed' })    
