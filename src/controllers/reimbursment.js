@@ -92,7 +92,8 @@ exports.deleteReimbursment = async (req,reply)=>{
         const id=req.params.id;
         const deletedreimbursment=await Reimbursment.findByIdAndRemove(id,{new:true,useFindAndModify:false})
         console.log("delete");
-        reply.send({deletedreimbursment,"error":"Your company is deleted successfully"});
+        const reimbursment = await Reimbursment.find({companyId:deletedreimbursment.companyId});
+        reply.send({deletedreimbursment,reimbursment,"error":"Your company is deleted successfully"});
     }
     catch(error){
         reply.send ({ "error" : 'Deletion Failed' })    
