@@ -8,6 +8,7 @@ const employeeSchema =new mongoose.Schema({
     employeeAddress : String,
     salary : Number,
     basicPay : Number,
+    approvedReimbursment : Number,
     role : String
 },{timestamps: true})
 module.exports = mongoose.model('Employee', employeeSchema);
