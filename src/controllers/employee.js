@@ -1,7 +1,5 @@
 const Employee = require("../models/employee")
 const Company = require("../models/company")
-
-
 exports.createEmployee = async (req, reply) => { 
     try { 
         const employee = new Employee(req.body)   
@@ -13,9 +11,8 @@ exports.createEmployee = async (req, reply) => {
             earnings+=Number(company.earningsDocArray[earning].amount);
           }
         console.log(earnings);
-
         //salary calculation
-        employee.salary=earnings+Number(employee.basicPay);
+        employee.salary=earnings+Number(employee.basicPay)-Number(employee.deductions);
         console.log(employee);
         employee.save()
         
@@ -33,7 +30,6 @@ exports.createEmployee = async (req, reply) => {
         reply.send ({ "error" : 'Creation Failed' })    
     } 
 }
-
 exports.viewAllEmployee = async (req, reply) => { 
     try { 
         const employee= await Employee.find();
@@ -43,7 +39,6 @@ exports.viewAllEmployee = async (req, reply) => {
         reply.send ({ "error" : 'View Failed' })    
     } 
 }
-
 exports.viewEmployee= async (req,reply) => {
     const id=req.params.id;
     
@@ -60,7 +55,6 @@ exports.viewEmployee= async (req,reply) => {
         reply.send ({ "error" : 'View Failed' })    
     } 
 }
-
 exports.viewEmployeeByCompany= async (req,reply) => {
     const companyId=req.params.companyId;
     try{
@@ -76,7 +70,6 @@ exports.viewEmployeeByCompany= async (req,reply) => {
         reply.send({"error":"Employee Fetch Failed"})
     }
 }
-
 exports.viewEmployeeEmail = async (req,reply) => {
     const email=req.params.email;
     
@@ -93,8 +86,6 @@ exports.viewEmployeeEmail = async (req,reply) => {
         reply.send ({ "error" : 'View Failed' })    
     } 
 }
-
-
 exports.editEmployee= async (req,reply)=>{
     try{
         const id = req.params.id;
@@ -105,20 +96,10 @@ exports.editEmployee= async (req,reply)=>{
         //altering company netpay according to updated employee details(basicpay)
         if(updatedEmployee){
             var company=await Company.findById(updatedEmployee.companyId)
-            if(updatedEmployee.basicPay >= employee.basicPay)
-            {
-                var diff= updatedEmployee.basicPay - employee.basicPay;
+               // var diff= updatedEmployee.basicPay - employee.basicPay;
                 var updatedObj={
-                    employeeNetPay:company.employeeNetPay + diff
+                    employeeNetPay:company.employeeNetPay - employee.salary + updatedEmployee.salary
                 }
-                              
-            }
-            else{
-                var diff= employee.basicPay - updatedEmployee.basicPay ;
-                var updatedObj={
-                    employeeNetPay:company.employeeNetPay - diff
-                } 
-            }
             //updating company table
             const updatedCompany = await Company.findByIdAndUpdate(updatedEmployee.companyId,{ $set: updatedObj},{new:true,useFindAndModify:false})
             const allEmployee=await Employee.find({companyId:updatedEmployee.companyId});
@@ -132,7 +113,6 @@ exports.editEmployee= async (req,reply)=>{
         reply.send ({ "error" : 'Update Failed' })    
     } 
 }
-
 exports.deleteEmployee = async (req,reply)=>{
     try{
         const id=req.params.id;
