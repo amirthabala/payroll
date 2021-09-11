@@ -10,6 +10,10 @@ const employeeSchema =new mongoose.Schema({
     basicPay : Number,
     approvedReimbursment : Number,
     deductions : Number,
-    role : String
+    role : String,
+    companyName : String,
+    dateOfBirth : String,
+    accNumber : String
+    
 },{timestamps: true})
 module.exports = mongoose.model('Employee', employeeSchema);
