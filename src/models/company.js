@@ -32,7 +32,10 @@ const companySchema =new mongoose.Schema({
     reimbursmentArray : Array,
     employeeNetPay : Number,
     employeeCount : Number,
-    logArray : Array
+    logArray : Array,
+
+    //payment
+    paidArray : Array
 
 },{timestamps: true})
 module.exports = mongoose.model('Company', companySchema);

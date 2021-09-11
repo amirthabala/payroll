@@ -62,7 +62,7 @@ exports.editCompany= async (req,reply)=>{
         const id = req.params.id;
         const updatedCompany = await Company.findByIdAndUpdate(id,{ $set:req.body},{new:true,useFindAndModify:false})
         if(updatedCompany){
-         reply.send({"message":"Your Company Is Updated Successfully"})
+         reply.send({updatedCompany,"message":"Your Company Is Updated Successfully"})
         }
         else{
             reply.send ({ "error" : 'No Company Found' })   
