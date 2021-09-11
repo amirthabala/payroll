@@ -6,6 +6,7 @@ const fastify = require('fastify')({
   fastify.register(require('./src/routes/company'), { prefix: '/api' })
   fastify.register(require('./src/routes/employee'), { prefix: '/api' })
   fastify.register(require('./src/routes/reimbursment'), { prefix: '/api' })
+  fastify.register(require('./src/routes/payslip'), { prefix: '/api' })
 
   // database connection
   const mongoose = require('mongoose');
