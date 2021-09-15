@@ -13,7 +13,8 @@ const employeeSchema =new mongoose.Schema({
     role : String,
     companyName : String,
     dateOfBirth : String,
-    accNumber : String
+    accNumber : String,
+    workLocation : String
     
 },{timestamps: true})
 module.exports = mongoose.model('Employee', employeeSchema);
