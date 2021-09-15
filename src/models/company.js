@@ -8,6 +8,7 @@ const companySchema =new mongoose.Schema({
     location : String,
     address : String,
     companyType : String,
+    workLocation : Array,
 
     //pay schedule
     payDate : String,
